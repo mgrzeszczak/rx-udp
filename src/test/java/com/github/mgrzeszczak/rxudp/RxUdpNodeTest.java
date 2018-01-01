@@ -20,6 +20,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
 import java.nio.channels.DatagramChannel;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
@@ -77,8 +79,10 @@ public class RxUdpNodeTest {
         RxUdpNode node = new RxUdpNode(channel);
         int count = 3;
         CountDownLatch latch = new CountDownLatch(count);
+        Map<Consumer, Boolean> received = new HashMap<>();
 
         Set<Consumer> consumers = IntStream.range(0, count).mapToObj(i -> mock(Consumer.class)).collect(Collectors.toSet());
+        consumers.forEach(c -> received.put(c, false));
 
         // act
         consumers.forEach(consumer -> {
@@ -86,7 +90,10 @@ public class RxUdpNodeTest {
                     .subscribeOn(Schedulers.io())
                     .subscribe(p -> {
                         consumer.accept(p);
-                        latch.countDown();
+                        if (!received.get(consumer)) {
+                            latch.countDown();
+                            received.put(consumer, true);
+                        }
                     });
         });
         latch.await();

@@ -1,6 +1,5 @@
 package com.github.mgrzeszczak.rxudp;
 
-import java.io.IOException;
 import java.net.ProtocolFamily;
 import java.net.SocketAddress;
 import java.net.SocketOption;
