@@ -97,22 +97,22 @@ public class RxUdpNodeTest {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionOnNullScheduler() {
         RxUdpNode.builder().scheduler(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionOnNullSocketAddress() {
         RxUdpNode.builder().socketAddress(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionOnNullProtocolFamily() {
         RxUdpNode.builder().protocolFamily(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionOnNullSocketOptionKey() {
         RxUdpNode.builder().socketOption(null, null);
     }

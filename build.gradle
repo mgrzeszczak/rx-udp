@@ -23,7 +23,7 @@ dependencies {
     compile "org.apache.logging.log4j:log4j-core:${log4j2_version}"
     compile "org.apache.logging.log4j:log4j-api:${log4j2_version}"
     compile "org.jetbrains:annotations:${jetbrains_annotations_version}"
-    compile group: "io.reactivex.rxjava2:rxjava:${rxjava_version}"
+    compile "io.reactivex.rxjava2:rxjava:${rxjava_version}"
     testCompile "org.mockito:mockito-core:${mockito_version}"
     testCompile "org.assertj:assertj-core:${assertj_version}"
     testCompile "junit:junit:${junit_version}"
