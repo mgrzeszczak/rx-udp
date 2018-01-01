@@ -47,9 +47,52 @@ DatagramChannel wrapped in RxJava.
 
 Version can be checked [__here__](https://jitpack.io/#mgrzeszczak/rx-udp).
 
-# Examples
+# How to use
 
-TODO
+### Creating RxUdpNode
+
+All builder parameters are optional:
+
+* socketAddress - address to which DatagramChannel will be bound
+* scheduler - scheduler on which DatagramChannel is listening for packets, by default a single thread executor service is used
+* protocolFamily - protocolFamily which will be used when opening DatagramChannel, by default StandardProtocolFamily.INET
+* socketOption - any additional socket option that is set by DatagramChannel.setOption method
+
+```
+RxUdpNode rxUdpNode = RxUdpNode.builder()
+    .socketAddress(new InetSocketAddress(8080))
+    .scheduler(Schedulers.io())
+    .build();
+```
+
+### Sending packet
+```
+rxUdpNode.send(
+    "message".getBytes(StandardCharsets.UTF_8),
+    new InetSocketAddress("255.255.255.255", 8080)
+).subscribe(() -> System.out.println("Sent!"));
+```
+
+### Getting local address
+```
+SocketAddress address = rxUdpNode.address().blockingGet();
+```
+
+### Observing incoming packets
+
+Multiple subscriptions are supported. New subscribers are notified of
+only the packets that came after the subscription occurred except for when
+it is the first subscription, which receives all unread packets.
+```
+rxUdpNode.packets()
+    .observeOn(Schedulers.io())
+    .subscribe(packet -> handle(packet));
+```
+
+### Close RxUdpNode
+```
+rxUdpNode.close().subscribe(() -> System.out.println("Closed!"));
+```
 
 # License
 ```
