@@ -2,6 +2,7 @@
 
 [![works badge](https://cdn.rawgit.com/nikku/works-on-my-machine/v0.2.0/badge.svg)](https://github.com/nikku/works-on-my-machine)
 [![Build Status](https://travis-ci.org/mgrzeszczak/rx-udp.png)](https://travis-ci.org/mgrzeszczak/rx-udp)
+[![codecov](https://codecov.io/gh/mgrzeszczak/rx-udp/branch/master/graph/badge.svg)](https://codecov.io/gh/mgrzeszczak/rx-udp)
 [![](https://jitpack.io/v/mgrzeszczak/rx-udp.svg)](https://jitpack.io/#mgrzeszczak/rx-udp)
 
 DatagramChannel wrapped in RxJava.
